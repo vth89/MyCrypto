@@ -145,6 +145,11 @@ const PATHS: IRoutePath[] = [
     name: 'REP_TOKEN_MIGRATION',
     title: 'REP Token Migration',
     path: '/migrate/rep'
+  },
+  {
+    name: 'FAUCET',
+    title: translateRaw('FAUCET'),
+    path: '/faucet'
   }
 ];
 

@@ -101,6 +101,7 @@ const TxStatus = lazy(() =>
 const RepTokenMigration = lazy(() =>
   import(/* webpackChunkName: "TokenMigration" */ '@features/TokenMigration/TokenMigrationStepper')
 );
+const Faucet = lazy(() => import(/* webpackChunkName: "Faucet" */ '@features/Faucet/Faucet'));
 
 export interface IAppRoutes {
   [K: string]: IAppRoute;
@@ -331,6 +332,15 @@ export const getStaticAppRoutes = (featureFlags: IFeatureFlags): IAppRoute[] => 
     requireAccounts: true,
     enabled: isTruthy(featureFlags.REP_TOKEN_MIGRATION),
     component: RepTokenMigration
+  },
+  {
+    name: ROUTE_PATHS.FAUCET.name,
+    title: ROUTE_PATHS.FAUCET.title,
+    path: ROUTE_PATHS.FAUCET.path,
+    exact: true,
+    requireAccounts: true,
+    enabled: isTruthy(featureFlags.FAUCET),
+    component: Faucet
   }
 ];
 
