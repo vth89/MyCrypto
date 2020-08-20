@@ -2,11 +2,8 @@ import { IStory, WalletId } from '@types';
 import { IS_DEV, IS_ELECTRON, hasWeb3Provider, IS_STAGING, IS_PROD } from '@utils';
 import {
   InsecureWalletWarning,
-  LedgerNanoSDecrypt,
   KeystoreDecrypt,
-  MnemonicDecrypt,
   PrivateKeyDecrypt,
-  TrezorDecrypt,
   Web3ProviderDecrypt,
   Web3ProviderInstall,
   ViewOnlyDecrypt,
@@ -35,20 +32,10 @@ export const getStories = (): IStory[] => [
   },
   {
     name: WalletId.LEDGER_NANO_S,
-    steps: [NetworkSelectPanel, LedgerNanoSDecrypt],
-    hideFromWalletList: true
-  },
-  {
-    name: WalletId.LEDGER_NANO_S_NEW,
     steps: [NetworkSelectPanel, LedgerDecrypt]
   },
   {
     name: WalletId.TREZOR,
-    steps: [NetworkSelectPanel, TrezorDecrypt],
-    hideFromWalletList: true
-  },
-  {
-    name: WalletId.TREZOR_NEW,
     steps: [NetworkSelectPanel, TrezorUnlock]
   },
   {
@@ -69,15 +56,6 @@ export const getStories = (): IStory[] => [
   },
   {
     name: WalletId.MNEMONIC_PHRASE,
-    steps: [
-      NetworkSelectPanel,
-      IS_DEV || IS_STAGING || IS_ELECTRON ? MnemonicDecrypt : InsecureWalletWarning
-    ],
-    isDisabled: IS_WEB_AND_PRODUCTION,
-    hideFromWalletList: true
-  },
-  {
-    name: WalletId.MNEMONIC_PHRASE_NEW,
     steps: [
       NetworkSelectPanel,
       IS_DEV || IS_STAGING || IS_ELECTRON ? MnemonicUnlock : InsecureWalletWarning
