@@ -1,5 +1,6 @@
 // @ADD_ACCOUNT_@todo: Icons really belongs to the WalletButton or a WalletIcon
 // component.
+import myCryptoIcon from '@assets/icons/brand/logo.svg';
 import mnemonicIcon from '@assets/images/icn-create-pw.svg';
 import keystoreIcon from '@assets/images/icn-keystore.svg';
 import privateKeyIcon from '@assets/images/icn-lock-safety.svg';
@@ -238,6 +239,18 @@ export const WALLETS_CONFIG: Record<WalletId, IWalletConfig> = {
     icon: WalletConnectSVG,
     description: 'ADD_WALLETCONNECTDESC',
     helpLink: getKBHelpArticle(WALLETCONNECT)
+  },
+  [WalletId.DESKTOP_SIGNER]: {
+    id: WalletId.DESKTOP_SIGNER,
+    name: 'Desktop Signer',
+    isDeterministic: false,
+    isSecure: true,
+    isDesktopOnly: false,
+    type: WalletType.WEB3,
+    lid: 'Desktop Signer',
+    icon: myCryptoIcon,
+    description: '',
+    helpLink: ''
   }
 };
 
