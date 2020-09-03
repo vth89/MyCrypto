@@ -1,4 +1,5 @@
 import {
+  DesktopSignerUnlock,
   InsecureWalletWarning,
   KeystoreDecrypt,
   LedgerDecrypt,
@@ -86,7 +87,7 @@ export const getStories = (): IStory[] => [
   },
   {
     name: WalletId.DESKTOP_SIGNER,
-    steps: [NetworkSelectPanel, MnemonicUnlock]
+    steps: [NetworkSelectPanel, DesktopSignerUnlock]
   },
   {
     name: WalletId.VIEW_ONLY,
