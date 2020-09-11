@@ -1,4 +1,4 @@
-import { Wei } from '@services';
+import { Wei } from '@utils';
 import { formatGasLimit, formatMnemonic, formatNumber, toFixedIfLarger } from '@utils/formatters';
 
 describe('toFixedIfLarger', () => {
@@ -68,11 +68,10 @@ describe('formatNumber', () => {
 
   pairs.forEach((pair) => {
     const digits = pair.digits;
-    it(`should convert ${pair.input.toString()} to ${
-      pair.output
-    } when using ${digits} digits`, () => {
-      expect(formatNumber(pair.input, pair.digits)).toEqual(pair.output);
-    });
+    it(`should convert ${pair.input.toString()} to ${pair.output
+      } when using ${digits} digits`, () => {
+        expect(formatNumber(pair.input, pair.digits)).toEqual(pair.output);
+      });
   });
 });
 

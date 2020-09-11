@@ -10,16 +10,7 @@ import {
 } from 'ethers/utils';
 
 import { CREATION_ADDRESS } from '@config';
-import {
-  bigNumGasLimitToViewable,
-  bigNumGasPriceToViewableGwei,
-  bigNumValueToViewableEther,
-  decodeTransfer,
-  fromTokenBase,
-  gasPriceToBase,
-  getDecimalFromEtherUnit,
-  toWei
-} from '@services/EthService';
+import { decodeTransfer } from '@services/EthService';
 import {
   getAssetByContractAndNetwork,
   getBaseAssetByNetwork,
@@ -50,7 +41,16 @@ import {
   StoreAccount,
   TAddress
 } from '@types';
+import {
+  bigNumGasLimitToViewable,
+  bigNumGasPriceToViewableGwei,
+  bigNumValueToViewableEther,
+  fromTokenBase,
+  gasPriceToBase,
+  toWei
+} from '@utils';
 
+import { getDecimalFromEtherUnit } from './units';
 import { isTransactionDataEmpty } from './validators';
 
 export const toTxReceipt = (txHash: ITxHash, status: ITxHistoryStatus) => (
@@ -161,7 +161,7 @@ export const makeTxConfigFromSignedTx = (
     senderAccount:
       decodedTx.from && networkDetected
         ? getStoreAccount(accounts)(decodedTx.from as TAddress, networkDetected.id) ||
-          oldTxConfig.senderAccount
+        oldTxConfig.senderAccount
         : oldTxConfig.senderAccount,
     gasPrice: gasPriceToBase(parseInt(decodedTx.gasPrice, 10)).toString(),
     gasLimit: decodedTx.gasLimit,

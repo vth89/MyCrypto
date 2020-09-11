@@ -2,19 +2,7 @@ import BN from 'bn.js';
 import { bufferToHex } from 'ethereumjs-util';
 
 import { MANDATORY_TRANSACTION_QUERY_PARAMS } from '@config';
-import {
-  Address,
-  encodeTransfer,
-  fromTokenBase,
-  inputGasLimitToHex,
-  inputGasPriceToHex,
-  inputNonceToHex,
-  inputValueToHex,
-  TokenValue,
-  toWei
-} from '@services/EthService';
-import { hexNonceToViewable, hexToString } from '@services/EthService/utils/makeTransaction';
-import { handleValues } from '@services/EthService/utils/units';
+import { encodeTransfer } from '@services/EthService';
 import { translateRaw } from '@translations';
 import {
   Asset,
@@ -35,10 +23,21 @@ import {
   TxQueryTypes
 } from '@types';
 import {
+  Address,
   deriveTxRecipientsAndAmount,
+  fromTokenBase,
   generateAssetUUID,
   guessIfErc20Tx,
-  isSameAddress
+  handleValues,
+  hexNonceToViewable,
+  hexToString,
+  inputGasLimitToHex,
+  inputGasPriceToHex,
+  inputNonceToHex,
+  inputValueToHex,
+  isSameAddress,
+  TokenValue,
+  toWei
 } from '@utils';
 import { isEmpty } from '@vendor';
 
@@ -164,8 +163,8 @@ export const parseTransactionQueryParams = (queryParams: any) => (
   const baseAsset = assets.find(({ uuid }) => uuid === network.baseAsset) as ExtendedAsset;
   const asset = erc20tx
     ? assets.find(
-        ({ contractAddress }) => contractAddress && isSameAddress(contractAddress as TAddress, to)
-      ) || generateGenericErc20(to, i.chainId, network.id)
+      ({ contractAddress }) => contractAddress && isSameAddress(contractAddress as TAddress, to)
+    ) || generateGenericErc20(to, i.chainId, network.id)
     : baseAsset;
   return {
     from: senderAccount.address,

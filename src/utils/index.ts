@@ -51,7 +51,9 @@ export {
   formatGasLimit,
   formatNumber,
   formatMnemonic,
-  toChecksumAddressByChainId
+  toChecksumAddressByChainId,
+  buildEIP681EtherRequest,
+  buildEIP681TokenRequest
 } from './formatters';
 export { makeBlob } from './blob';
 export { default as consoleAdvertisement } from './consoleAdvertisement';
@@ -98,3 +100,57 @@ export * from './wallets';
 export { isTruthy } from './isTruthy';
 export { filterDropdownAssets, filterValidAssets } from './filterAssets';
 export * from './date';
+export {
+  decryptPrivKey,
+  decryptMnemonicToPrivKey,
+  decodeCryptojsSalt,
+  evp_kdf,
+  decipherBuffer
+} from './decrypt';
+export { makeExplorer } from './makeExplorer';
+export { signMessageWithPrivKeyV2, signRawTxWithPrivKey, verifySignedMessage } from './signing';
+export { messageToData } from './formatters';
+export { stripHexPrefix, stripHexPrefixAndLower } from './stripHexPrefix';
+export {
+  Units,
+  toWei,
+  handleValues,
+  gasPriceToBase,
+  fromWei,
+  toTokenBase,
+  Wei,
+  TokenValue,
+  Address,
+  baseToConvertedUnit,
+  fromTokenBase,
+  totalTxFeeToString,
+  totalTxFeeToWei,
+  gasStringsToMaxGasNumber,
+  gasStringsToMaxGasBN,
+  convertedToBaseUnit,
+  getDecimalFromEtherUnit,
+  convertTokenBase,
+  calculateGasUsedPercentage
+} from './units';
+export { padLeftEven } from './padLeftEven';
+export { normalise } from './normalise';
+export { getTransactionFields } from './getTransactionFields';
+export {
+  hexNonceToViewable,
+  makeTransaction,
+  inputGasPriceToHex,
+  inputGasLimitToHex,
+  inputValueToHex,
+  hexWeiToString,
+  hexToString,
+  inputNonceToHex,
+  bigNumGasPriceToViewableWei,
+  bigNumGasLimitToViewable,
+  hexValueToViewableEther,
+  bigNumGasPriceToViewableGwei,
+  bigNumValueToViewableEther
+} from './makeTransaction';
+export { hexEncodeData, hexEncodeQuantity } from './hexEncode';
+export { hexToNumber } from './hexToNumber';
+export * from '../services/EthService/utils/providerWrappers';
+export { appendNonce, appendGasLimit, appendGasPrice, appendSender } from './transactions';
