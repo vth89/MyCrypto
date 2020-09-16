@@ -35,7 +35,13 @@ import {
   getTransactionReceiptFromHash,
   ProviderHandler
 } from '@services/EthService';
-import { SettingsContext, StoreContext, useAccounts, useContacts } from '@services/Store';
+import {
+  getStoreAccount,
+  SettingsContext,
+  StoreContext,
+  useAccounts,
+  useContacts
+} from '@services/Store';
 import { BREAK_POINTS } from '@theme';
 import translate, { translateRaw } from '@translations';
 import {
@@ -158,7 +164,7 @@ const TxReceipt = ({
       const provider = new ProviderHandler(txConfig.network);
       const timestampInterval = setInterval(() => {
         getTimestampFromBlockNum(blockNumber, provider).then((transactionTimestamp) => {
-          if (txReceipt.txType === ITxType.FAUCET) {
+          if (txReceipt && txReceipt.txType === ITxType.FAUCET) {
             const recipientAccount = getStoreAccount(accounts)(txReceipt.to, txConfig.network.id);
             if (recipientAccount) {
               addTxToAccount(recipientAccount, {
