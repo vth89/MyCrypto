@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Banner } from '@components';
 import { DrawerContext, ErrorContext, MigrateLS } from '@features';
+import translate from '@translations';
 import { useFeatureFlags } from '@services';
 import { SettingsContext, StoreContext } from '@services/Store';
 import { BREAK_POINTS, COLORS, MAX_CONTENT_WIDTH, MIN_CONTENT_PADDING, SPACING } from '@theme';
@@ -45,6 +46,7 @@ const STop = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
+    height: 77px;
     z-index: 11;
   }
 `;
@@ -78,7 +80,31 @@ const SContainer = styled.div`
     `}
 `;
 
+const SBanner = styled(Banner)`
+  @media (max-width: ${BREAK_POINTS.SCREEN_SM}) {
+    position: sticky;
+    top: 77px;
+    left: 0;
+  }
+  background-color: ${COLORS.LIGHT_PURPLE};
+`;
+
+const CenteredBannerText = styled.div`
+  text-align: center;
+  & a {
+    &:hover {
+      font-weight: normal;
+    }
+  }
+`;
+
+export const ANNOUNCEMENT_MSG = () => (
+  <CenteredBannerText>{translate('BETA_ANNOUNCEMENT')}</CenteredBannerText>
+);
+
 const MigrateLSWithStore = pipe(withContext(StoreContext), withContext(SettingsContext))(MigrateLS);
+
+const announcementMessage = ANNOUNCEMENT_MSG();
 
 export default function Layout({ config = {}, className = '', children }: Props) {
   const { centered = true, fluid, fullW = false, bgColor, paddingV } = config;
@@ -118,6 +144,7 @@ export default function Layout({ config = {}, className = '', children }: Props)
           setDrawerScreen={setScreen}
         />
       </STop>
+      <SBanner type={BannerType.ANNOUNCEMENT} value={announcementMessage} />
       <SContainer
         centered={centered}
         fluid={fluid}
